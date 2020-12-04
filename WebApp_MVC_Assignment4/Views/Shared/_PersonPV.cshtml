@@ -1,0 +1,14 @@
+﻿@model Person
+
+<tr>
+    <th scope="col">@Model.FirstName</th>
+    <th scope="col">@Model.LastName</th>
+    <th scope="col">@Model.PhoneNumber</th>
+    <th scope="col">@Model.Address</th>
+    <th scope="col">
+        <a asp-controller="People" asp-action="DeletePeople" asp-route-id=@Model.PersonID class="bodyTxt">Remove</a>
+    </th>
+    <th scope="col">
+        <a asp-controller="People" asp-action="EditPeople" asp-route-id=@Model.PersonID class="bodyTxt">Edit</a>
+    </th>
+</tr>
