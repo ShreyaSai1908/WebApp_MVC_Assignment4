@@ -99,6 +99,79 @@ namespace WebApp_MVC_Assignment4.Controllers
             return RedirectToAction(nameof(Add_View_People));
         }
 
+        /*AJAX related code*/
+        [HttpGet]
+        public IActionResult AddPerson()
+        {
+            return PartialView("_AddPerson");
+        }
+        
+        [HttpPost]
+        public IActionResult AddPerson(CreatePersonViewModel person)
+        {
+            Person newPerson = null;
+            if (ModelState.IsValid)
+            {
+                newPerson = ps.Add(person);               
+            }
+
+            return PartialView("_PersonPV", newPerson);
+        }
+
+        [HttpGet]
+        public IActionResult EditPerson(int id)
+        {
+            Person editPerson = ps.FindBy(id);
+
+            /*
+            CreatePersonViewModel modelPerson = new CreatePersonViewModel();
+            modelPerson.FirstName = editPerson.FirstName;
+            modelPerson.LastName = editPerson.LastName;
+            modelPerson.PhoneNumber = editPerson.PhoneNumber;
+            modelPerson.Address = editPerson.Address;*/
+
+            return PartialView("_EditPerson", editPerson);
+        }
+
+        [HttpPost]
+        public IActionResult EditPerson(Person person)
+        {
+            Person editedPerson = null;
+            if (ModelState.IsValid)
+            {
+                editedPerson = ps.Edit(person.PersonID,person);
+            }
+
+            return PartialView("_PersonPV", editedPerson);
+        }
+
+        public IActionResult RemovePerson(int id)
+        {
+            Person removedPerson = null;
+            if (ps.Remove(id)) 
+            {
+                removedPerson = null;
+            }
+
+            return PartialView("_PersonPV", removedPerson);
+        }
+
+        [HttpPost]
+        public IActionResult SearchPeople(PeopleViewModel objModel)
+        {
+            if (objModel.Search != null)
+            {
+                peopleViewModel = ps.FindBy(objModel);
+            }
+            else 
+            {
+                peopleViewModel = ps.All();
+            }
+
+            return PartialView("_SearchPeople", peopleViewModel);
+        }
+        /*AJAX related code*/
+
     }
 }
 

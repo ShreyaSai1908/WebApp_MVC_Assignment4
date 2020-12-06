@@ -1,0 +1,28 @@
+﻿@model PeopleViewModel
+
+<div class="row">
+    <div class="col">First Name</div>
+    <div class="col">Last Name</div>
+    <div class="col">Phone Number</div>
+    <div class="col">Address</div>
+    <div class="col"> </div>
+    <div class="col"> </div>
+</div>
+@foreach (Person person in Model.AllPeople)
+{
+    string rowid = "personRowID-" + person.PersonID;
+    <div id="@rowid">
+        <div class="row">
+            <div class="col">@person.FirstName</div>
+            <div class="col">@person.LastName</div>
+            <div class="col">@person.PhoneNumber</div>
+            <div class="col">@person.Address</div>
+            <div class="col">
+                <button onclick="GetEditPersonForm('@Url.Action("EditPerson","People")','@person.PersonID')" class="btn btn-outline-dark">Edit</button>
+            </div>
+            <div class="col">
+                <button onclick="RemovePerson('@Url.Action("RemovePerson","People")','@person.PersonID')" class="btn btn-outline-danger">Remove</button>
+            </div>
+        </div>
+     </div>
+ }

@@ -4,48 +4,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <h1>Add People</h1>
-</div>
-
-@if (Model.ModelErr != null)
-{
-    <div class="errText">
-        <p>
-            @Model.ModelErr
-        </p>
+@*--Without AJAX
+    <div class="container">
+        <h1>Add People</h1>
     </div>
-}
+*@
 
+@* --Without AJAX
+    @if (Model.ModelErr != null)
+    {
+        <div class="errText">
+            <p>
+                @Model.ModelErr
+            </p>
+        </div>
+    }
+*@
 
-<div class="container">
-    <form asp-action="Add_View_People" method="post">
-        <div class="form-group">
-            <label asp-for="AddPerson.FirstName"></label>
-            <input asp-for="AddPerson.FirstName" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="AddPerson.LastName"></label>
-            <input asp-for="AddPerson.LastName" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="AddPerson.PhoneNumber"></label>
-            <input asp-for="AddPerson.PhoneNumber" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="AddPerson.Address"></label>
-            <input asp-for="AddPerson.Address" class="form-control" />
-        </div>
-        <input type="submit" value="Create Person" class="btn btn-outline-primary" />
-    </form>
+@* --Without AJAX
+    <div class="container">
+        <form asp-action="Add_View_People" method="post">
+            <div class="form-group">
+                <label asp-for="AddPerson.FirstName"></label>
+                <input asp-for="AddPerson.FirstName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AddPerson.LastName"></label>
+                <input asp-for="AddPerson.LastName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AddPerson.PhoneNumber"></label>
+                <input asp-for="AddPerson.PhoneNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AddPerson.Address"></label>
+                <input asp-for="AddPerson.Address" class="form-control" />
+            </div>
+            <input type="submit" value="Create Person" class="btn btn-outline-primary" />
+        </form>
+    </div>
+*@
+
+@*--Using AJAX*@
+<div class="container" id="toggleBtnAddPersonForm">
+    <button onclick="GetAddPersonForm('@Url.Action("AddPerson","People")')" id="btnAddPerson" class="btn btn-outline-primary">Add Person</button>
 </div>
+
 <br />
 <div class="container">
     <h1>View People</h1>
 </div>
 <br />
 <div class="container">
-    <form asp-action="Add_View_People" method="post" class="form-inline">
+    <form class="form-inline" asp-controller="People" asp-action="SearchPeople" onsubmit="SearchPeople(event, this)">
         <div class="form-group">
             <input asp-for="Search" class="form-control" />
             <input type="submit" value="Search" class="btn btn-outline-primary" />
@@ -54,9 +65,8 @@
 </div>
 <br />
 
-
-@* using bootstrap "div row"
-        <div class="row">
+@*using bootstrap "div row" --Without AJAX
+     <div class="row">
         <div class="col-12">
             <div class="row">
                 <div class="col">First Name</div>
@@ -71,30 +81,53 @@
                 <partial name="_PersonPV" model="person"/>
             }
          </div>
-    </div>*@
+    </div>
+*@
 
-@*using bootstrap table*@
-@if (Model.AllPeople.Count > 0)
-{
-    <div class="container">
-        <table class="table table-hover table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Phone Number</th>
-                    <th scope="col">Address</th>
-                    <th scope="col"> </th>
-                    <th scope="col"> </th>
-                </tr>
-            </thead>
-            <tbody>
+@*using bootstrap table --Without AJAX
+    @if (Model.AllPeople.Count > 0)
+    {
+        <div class="container">
+            <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Address</th>
+                        <th scope="col"> </th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Person person in Model.AllPeople)
+                    {
+                        <partial name="_PersonPV" model="person" />
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+*@
+
+@*using AJAX*@
+
+   <div class="container" >
+       <div class="row">
+           <div class="col-12" id="peopleListArea">
+               <div class="row">
+                   <div class="col">First Name</div>
+                   <div class="col">Last Name</div>
+                   <div class="col">Phone Number</div>
+                   <div class="col">Address</div>
+                   <div class="col"> </div>
+                   <div class="col"> </div>
+               </div>
                 @foreach (Person person in Model.AllPeople)
                 {
-                    <partial name="_PersonPV" model="person" />
-                }
-            </tbody>
-        </table>
-    </div>
-}
-
+                       <partial name="_PersonPV" model="person" />
+                }              
+           </div>
+       </div>     
+   </div>
+   
