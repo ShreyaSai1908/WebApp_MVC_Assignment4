@@ -24,7 +24,7 @@
         <div class="col">@Model.PhoneNumber</div>
         <div class="col">@Model.Address</div>
         <div class="col">
-            <button onclick="GetEditPersonForm('@Url.Action("EditPerson","People")','@Model.PersonID')" class="btn btn-outline-dark">Edit</button>
+             <button onclick="GetEditPersonForm('@Url.Action("EditPerson","People")','@Model.PersonID')" class="btn btn-outline-dark">Edit</button>
         </div>
         <div class="col">
             <button onclick="RemovePerson('@Url.Action("RemovePerson","People")','@Model.PersonID')" class="btn btn-outline-danger">Remove</button>

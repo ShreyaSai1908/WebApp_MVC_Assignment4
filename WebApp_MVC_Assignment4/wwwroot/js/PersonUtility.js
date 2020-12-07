@@ -6,6 +6,7 @@ function GetAddPersonForm(urlToCreateForm)
     btnAddPerson = $("#btnAddPerson");
 
     $.get(urlToCreateForm, function (result) {
+        console.log("From Controller:", result);
         btnAddPerson.replaceWith(result);
     })
 }
@@ -13,7 +14,7 @@ function GetAddPersonForm(urlToCreateForm)
 function PostAddPersonForm(event, form)
 {
     event.preventDefault();
-   
+
     $.post(form.action,
         {
             FirstName: form.FirstName.value,
@@ -23,19 +24,21 @@ function PostAddPersonForm(event, form)
         },
         function (data, status)
         {
+            console.log("AddPerson[Post] data:", data);
             $("#peopleListArea").append(data);
             $("#toggleBtnAddPersonForm").html(btnAddPerson); 
 
         }).fail(function (badForm)
         {
-            console.log("badForm: Fail");
-            //$("#createCarDiv").html(badForm.responseText);
+            $("#toggleBtnAddPersonForm").html(badForm.responseText);
         });
 }
 
 function GetEditPersonForm(urlToEditForm, personID) {
-    editedPersonArea = $("#personRowID-" + personID);
+    console.log("urlToEditForm:", urlToEditForm);
+    editedPersonArea = $("#personRowID-" + personID);    
     $.get(urlToEditForm + "/" + personID, function (result) {
+        //console.log("editedPersonArea:", result);
         editedPersonArea.html(result);
     })
 }
@@ -52,10 +55,12 @@ function PostEditPersonForm(event, form) {
             Address: form.Address.value
         },
         function (data, status) {
+            console.log("PersonEdit [Post] data:", data);
             $(editedPersonArea).replaceWith(data);
 
         }).fail(function (badForm) {
-            console.log("badForm: Fail");
+            console.log("badForm:", badForm.responseText);
+            editedPersonArea.html(badForm.responseText);
         });
 }
 

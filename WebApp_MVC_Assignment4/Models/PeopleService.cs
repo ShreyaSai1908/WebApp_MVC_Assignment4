@@ -32,9 +32,9 @@ namespace WebApp_MVC_Assignment4.Models
 
             foreach (Person person in peopleViewModel.AllPeople)
             {
-                if ((person.FirstName).Contains(pvm.Search) ||
-                     (person.LastName).Contains(pvm.Search) ||
-                      (person.Address).Contains(pvm.Search))
+                if ((person.FirstName).Contains(pvm.Search,StringComparison.OrdinalIgnoreCase) ||
+                     (person.LastName).Contains(pvm.Search,StringComparison.OrdinalIgnoreCase) ||
+                      (person.Address).Contains(pvm.Search,StringComparison.OrdinalIgnoreCase))
                 {
                     searchedPeople.Add(person);
                 }

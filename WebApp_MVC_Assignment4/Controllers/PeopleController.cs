@@ -11,8 +11,8 @@ namespace WebApp_MVC_Assignment4.Controllers
 {
     public class PeopleController : Controller
     {
-        private static PeopleService ps = new PeopleService();
-        private static PeopleViewModel peopleViewModel;
+        private PeopleService ps = new PeopleService();
+        private PeopleViewModel peopleViewModel;
         private readonly ILogger<PeopleController> _logger;
 
         public PeopleController(ILogger<PeopleController> logger)
@@ -112,10 +112,11 @@ namespace WebApp_MVC_Assignment4.Controllers
             Person newPerson = null;
             if (ModelState.IsValid)
             {
-                newPerson = ps.Add(person);               
+                newPerson = ps.Add(person);
+                return PartialView("_PersonPV", newPerson);
             }
-
-            return PartialView("_PersonPV", newPerson);
+            Response.StatusCode = 400;
+            return PartialView("_AddPerson", person);
         }
 
         [HttpGet]
@@ -140,9 +141,11 @@ namespace WebApp_MVC_Assignment4.Controllers
             if (ModelState.IsValid)
             {
                 editedPerson = ps.Edit(person.PersonID,person);
+                return PartialView("_PersonPV", editedPerson);
             }
 
-            return PartialView("_PersonPV", editedPerson);
+            Response.StatusCode = 400;
+            return PartialView("_EditPerson", person);
         }
 
         public IActionResult RemovePerson(int id)
