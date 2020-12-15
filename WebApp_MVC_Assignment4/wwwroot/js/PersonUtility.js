@@ -10,7 +10,7 @@ function GetAddPersonForm(urlToCreateForm)
         btnAddPerson.replaceWith(result);
     })
 }
-
+        
 function PostAddPersonForm(event, form)
 {
     event.preventDefault();

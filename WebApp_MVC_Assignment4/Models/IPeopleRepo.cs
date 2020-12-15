@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApp_MVC_Assignment4.Models
 {
-    interface IPeopleRepo
+    public interface IPeopleRepo
     {
         public Person Create(string FirstName, string LastName, string PhoneNumber, string Address);
         public List<Person> Read();

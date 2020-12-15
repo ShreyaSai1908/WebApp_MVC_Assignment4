@@ -11,14 +11,19 @@ namespace WebApp_MVC_Assignment4.Controllers
 {
     public class PeopleController : Controller
     {
-        private PeopleService ps = new PeopleService();
+        private IPeopleService ps;
+        public PeopleController(IPeopleService peopleService)
+        {
+            ps = peopleService;
+        }
+
         private PeopleViewModel peopleViewModel;
-        private readonly ILogger<PeopleController> _logger;
+       /* private readonly ILogger<PeopleController> _logger;
 
         public PeopleController(ILogger<PeopleController> logger)
         {
             _logger = logger;
-        }
+        }*/
 
         public IActionResult Index()
         {

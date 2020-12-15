@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
+
 
 namespace WebApp_MVC_Assignment4.Models
 {
     public class PeopleService : IPeopleService
     {
-        private static InMemoryPeopleRepo pr = new InMemoryPeopleRepo();
+        IPeopleRepo pr;
+        public PeopleService(IPeopleRepo peopleRepo)
+        {
+            pr = peopleRepo;
+        }
 
         public Person Add(CreatePersonViewModel modelData)
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApp_MVC_Assignment4.Models
 {
-    interface IPeopleService
+    public interface IPeopleService
     {
         public Person Add(CreatePersonViewModel person);
         public PeopleViewModel All();
