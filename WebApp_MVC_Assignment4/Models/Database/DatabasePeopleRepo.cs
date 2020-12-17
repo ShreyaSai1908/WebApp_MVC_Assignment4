@@ -1,0 +1,50 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using WebApp_MVC_Assignment4.Models;
+
+namespace WebApp_MVC_Assignment4.Models.Database
+{
+    public class DatabasePeopleRepo : IPeopleRepo
+    {
+        private readonly PeopleDbContext _peopleDbContext;
+
+        public DatabasePeopleRepo(PeopleDbContext peopleDbContext)
+        {
+            _peopleDbContext = peopleDbContext;
+        }
+
+        public Person Create(string FirstName, string LastName, string PhoneNumber, string Address)
+        {
+            Person addingPerson = new Person(FirstName, LastName, PhoneNumber, Address);
+
+            _peopleDbContext.GetPeopleList.Add(addingPerson);
+            _peopleDbContext.SaveChanges();
+            return addingPerson;
+            
+        }
+
+        public bool Delete(Person person)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Person> Read()
+        {
+            return _peopleDbContext.GetPeopleList.ToList();
+        }
+
+        public Person Read(int id)
+        {
+            return _peopleDbContext.GetPeopleList.SingleOrDefault(getPeopleList => getPeopleList.PersonID == id);
+        }
+
+        public Person Update(Person person)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

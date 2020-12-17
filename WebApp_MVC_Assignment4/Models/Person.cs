@@ -7,7 +7,19 @@ using System.Threading.Tasks;
 namespace WebApp_MVC_Assignment4.Models
 {
     public class Person
-    {        
+    {
+        public Person()
+        {
+        }
+
+        public Person(string firstName, string lastName, string phoneNumber, string address)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Address = address;
+        }
+
         public int PersonID { get; set; }
 
         [Required]

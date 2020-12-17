@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp_MVC_Assignment4.Models;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using WebApp_MVC_Assignment4.Models.Database;
 
 namespace WebApp_MVC_Assignment4
 {
@@ -24,8 +26,12 @@ namespace WebApp_MVC_Assignment4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PeopleDbContext>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddScoped<IPeopleService, PeopleService>(); //Container setting for IoC
-            services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>(); //Container setting for IoC
+            //services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>(); //Container setting for IoC
+            services.AddScoped<IPeopleRepo, DatabasePeopleRepo>(); //Container setting for IoC
             services.AddMvc();
         }
 
