@@ -29,7 +29,14 @@ namespace WebApp_MVC_Assignment4.Models.Database
 
         public bool Delete(Person person)
         {
-            throw new NotImplementedException();
+            bool delete= true;
+
+            if(delete==true)
+            { 
+                _peopleDbContext.Remove(person);
+            }
+
+            return delete;
         }
 
         public List<Person> Read()
@@ -44,7 +51,10 @@ namespace WebApp_MVC_Assignment4.Models.Database
 
         public Person Update(Person person)
         {
-            throw new NotImplementedException();
+            Person update = new Person();
+            update = person;
+            
+            return (update);
         }
     }
 }
