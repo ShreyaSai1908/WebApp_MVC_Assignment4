@@ -76,7 +76,7 @@ namespace WebApp_MVC_Assignment4.Models
             person.LastName = editPerson.LastName;
             person.PhoneNumber = editPerson.PhoneNumber;
             person.Address = editPerson.Address;
-
+            pr.Update(person);
             return person;
         }
         public bool Remove(int findID)

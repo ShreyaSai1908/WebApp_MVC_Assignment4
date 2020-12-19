@@ -34,6 +34,7 @@ namespace WebApp_MVC_Assignment4.Models.Database
             if(delete==true)
             { 
                 _peopleDbContext.Remove(person);
+                _peopleDbContext.SaveChanges();
             }
 
             return delete;
@@ -51,10 +52,9 @@ namespace WebApp_MVC_Assignment4.Models.Database
 
         public Person Update(Person person)
         {
-            Person update = new Person();
-            update = person;
-            
-            return (update);
+            _peopleDbContext.Update(person);
+            _peopleDbContext.SaveChanges();
+            return (person);
         }
     }
 }
