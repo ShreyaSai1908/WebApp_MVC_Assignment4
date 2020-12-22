@@ -24,7 +24,7 @@ namespace WebApp_MVC_Assignment4.Controllers
         // GET: CountryController
         public ActionResult ShowCountry()
         {
-            CreateCountryViewModel ctyVM = new CreateCountryViewModel();
+            /*CreateCountryViewModel ctyVM = new CreateCountryViewModel();
 
             Country cty = new Country();
 
@@ -34,8 +34,10 @@ namespace WebApp_MVC_Assignment4.Controllers
             List<Country> countryList = new List<Country>();
             countryList.Add(cty);
 
-            ctyVM.CountryList = countryList;
+            ctyVM.CountryList = countryList;*/
 
+            CreateCountryViewModel ctyVM = new CreateCountryViewModel();
+            ctyVM.CountryList = _countryService.All();
             return View(ctyVM);
         }
 

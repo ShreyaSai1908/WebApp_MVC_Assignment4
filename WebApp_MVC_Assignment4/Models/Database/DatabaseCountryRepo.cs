@@ -44,7 +44,7 @@ namespace WebApp_MVC_Assignment4.Models.Database
 
         public List<Country> Read()
         {
-            throw new NotImplementedException();
+            return _peopleDbContext.GetCountriesList.ToList();
         }
 
         public Country Read(int id)

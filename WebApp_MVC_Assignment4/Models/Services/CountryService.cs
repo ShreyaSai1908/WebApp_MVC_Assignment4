@@ -28,7 +28,7 @@ namespace WebApp_MVC_Assignment4.Models.Services
 
         public List<Country> All()
         {
-            throw new NotImplementedException();
+            return _countryRepo.Read();
         }
 
         public Country Edit(int id, CreateCountryViewModel edit)
