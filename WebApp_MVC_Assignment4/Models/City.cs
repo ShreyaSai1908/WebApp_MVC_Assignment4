@@ -30,6 +30,8 @@ namespace WebApp_MVC_Assignment4.Models
 
         [Required]
         public string States { get; set; }
-        
+
+        public Country Country { get; set; }
+
     }
 }

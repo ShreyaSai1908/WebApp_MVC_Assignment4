@@ -4,10 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp_MVC_Assignment4.Models
+namespace WebApp_MVC_Assignment4.Models.ViewModels
 {
-    public class Country
+    public class CreateCountryViewModel
     {
+        public List<Country> CountryList { get; set; }
+        public int CityID { get; set; }
+
         [Required]
         public List<City> CityList = new List<City>();
 
@@ -16,6 +19,5 @@ namespace WebApp_MVC_Assignment4.Models
 
         [Required]
         public string CountryName { get; set; }
-
     }
 }

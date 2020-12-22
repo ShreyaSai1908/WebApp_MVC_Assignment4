@@ -40,6 +40,11 @@ namespace WebApp_MVC_Assignment4
             services.AddScoped<ICityService, CityService>(); //Container setting for IoC
             //services.AddScoped<ICityRepo, InMemoryCityRepo>(); //Container setting for IoC
             services.AddScoped<ICityRepo, DatabaseCityRepo>(); //Container setting for IoC
+
+            /*City Service*/
+            services.AddScoped<ICountryService, CountryService>(); //Container setting for IoC
+            //services.AddScoped<ICountryRepo, InMemoryCountryRepo>(); //Container setting for IoC
+            services.AddScoped<ICountryRepo, DatabaseCountryRepo>(); //Container setting for IoC
             
             services.AddMvc();
         }

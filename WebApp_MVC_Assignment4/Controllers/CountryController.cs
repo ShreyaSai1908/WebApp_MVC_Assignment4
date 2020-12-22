@@ -4,15 +4,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApp_MVC_Assignment4.Models;
+using WebApp_MVC_Assignment4.Models.Services;
+using WebApp_MVC_Assignment4.Models.ViewModels;
 
 namespace WebApp_MVC_Assignment4.Controllers
 {
     public class CountryController : Controller
     {
-        // GET: CountryController
-        public ActionResult Index()
+        private readonly ICityService _cityService;
+        private readonly ICountryService _countryService;
+                
+        public CountryController(ICityService cityService, ICountryService countryService)
         {
-            return View();
+            _cityService = cityService;
+            _countryService = countryService;
+        }
+
+        // GET: CountryController
+        public ActionResult ShowCountry()
+        {
+            CreateCountryViewModel ctyVM = new CreateCountryViewModel();
+
+            Country cty = new Country();
+
+            cty.CountryName = "Default Country";
+            cty.CountryId = 0;
+
+            List<Country> countryList = new List<Country>();
+            countryList.Add(cty);
+
+            ctyVM.CountryList = countryList;
+
+            return View(ctyVM);
         }
 
         // GET: CountryController/Details/5
@@ -22,23 +46,33 @@ namespace WebApp_MVC_Assignment4.Controllers
         }
 
         // GET: CountryController/Create
-        public ActionResult Create()
+        public ActionResult CreateCountry()
         {
-            return View();
+            CreateCountryViewModel ctyVM = new CreateCountryViewModel();
+            ctyVM.CityList=_cityService.All();
+            return View(ctyVM);
         }
 
         // POST: CountryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CreateCountry(CreateCountryViewModel ctyVM)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                Country country = _countryService.Add(ctyVM);
+
+                if (country == null)
+                {
+                    ModelState.AddModelError("msg", "Database Problem");
+                    return View(ctyVM);
+                }
+
+                return RedirectToAction(nameof(ShowCountry));
             }
-            catch
+            else
             {
-                return View();
+                return View(ctyVM);
             }
         }
 
@@ -55,7 +89,7 @@ namespace WebApp_MVC_Assignment4.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ShowCountry));
             }
             catch
             {
@@ -76,7 +110,7 @@ namespace WebApp_MVC_Assignment4.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ShowCountry));
             }
             catch
             {
