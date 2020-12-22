@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp_MVC_Assignment4.Models;
+using WebApp_MVC_Assignment4.Models.Services;
 
 namespace WebApp_MVC_Assignment4.Models.Database
 {
@@ -33,7 +34,7 @@ namespace WebApp_MVC_Assignment4.Models.Database
 
             if(delete==true)
             { 
-                _peopleDbContext.Remove(person);
+                _peopleDbContext.GetPeopleList.Remove(person);
                 _peopleDbContext.SaveChanges();
             }
 

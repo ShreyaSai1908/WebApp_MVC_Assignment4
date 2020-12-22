@@ -23,6 +23,8 @@ namespace WebApp_MVC_Assignment4.Models
             [Required]
             [StringLength(80, MinimumLength = 5)]
             public string Address { get; set; }
-        
+
+            public City City { get; set; }
+
     }
 }

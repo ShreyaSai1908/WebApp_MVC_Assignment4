@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp_MVC_Assignment4.Models;
 
 namespace WebApp_MVC_Assignment4.Migrations
 {
     [DbContext(typeof(PeopleDbContext))]
-    partial class PeopleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201221230036_revertToPerson4")]
+    partial class revertToPerson4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +80,7 @@ namespace WebApp_MVC_Assignment4.Migrations
 
             modelBuilder.Entity("WebApp_MVC_Assignment4.Models.Person", b =>
                 {
-                    b.HasOne("WebApp_MVC_Assignment4.Models.City", "City")
+                    b.HasOne("WebApp_MVC_Assignment4.Models.City", null)
                         .WithMany("PersonInCity")
                         .HasForeignKey("CityId");
                 });

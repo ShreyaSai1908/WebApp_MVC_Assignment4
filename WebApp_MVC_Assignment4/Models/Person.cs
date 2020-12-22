@@ -20,6 +20,7 @@ namespace WebApp_MVC_Assignment4.Models
             Address = address;
         }
 
+        [Key]
         public int PersonID { get; set; }
 
         [Required]
@@ -38,6 +39,7 @@ namespace WebApp_MVC_Assignment4.Models
         [StringLength(80, MinimumLength = 5)]
         public string Address { get; set; }
 
+        public City City { get; set; }
         
     }
 }

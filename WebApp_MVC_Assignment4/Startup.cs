@@ -11,6 +11,8 @@ using WebApp_MVC_Assignment4.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using WebApp_MVC_Assignment4.Models.Database;
+using WebApp_MVC_Assignment4.Models.Repositorys;
+using WebApp_MVC_Assignment4.Models.Services;
 
 namespace WebApp_MVC_Assignment4
 {
@@ -29,9 +31,16 @@ namespace WebApp_MVC_Assignment4
             services.AddDbContext<PeopleDbContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            /*People Service*/
             services.AddScoped<IPeopleService, PeopleService>(); //Container setting for IoC
             //services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>(); //Container setting for IoC
             services.AddScoped<IPeopleRepo, DatabasePeopleRepo>(); //Container setting for IoC
+
+            /*City Service*/
+            services.AddScoped<ICityService, CityService>(); //Container setting for IoC
+            //services.AddScoped<ICityRepo, InMemoryCityRepo>(); //Container setting for IoC
+            services.AddScoped<ICityRepo, DatabaseCityRepo>(); //Container setting for IoC
+            
             services.AddMvc();
         }
 

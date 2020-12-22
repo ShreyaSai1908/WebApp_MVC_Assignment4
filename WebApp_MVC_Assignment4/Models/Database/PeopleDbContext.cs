@@ -13,5 +13,6 @@ namespace WebApp_MVC_Assignment4.Models
 
         }
         public DbSet<Person> GetPeopleList { get; set; }
+        public DbSet<City> GetCitiesList { get; set; }
     }
 }

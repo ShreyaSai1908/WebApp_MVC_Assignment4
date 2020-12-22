@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using WebApp_MVC_Assignment4.Models;
 
@@ -62,7 +63,7 @@ namespace WebApp_MVC_Assignment4.Controllers
             if (objModel.AddPerson != null)
             {
                 if (ModelState.IsValid)
-                {
+                {                    
                     createPersonModelView = objModel.AddPerson;
                     peopleViewModel = null;
                     ps.Add(createPersonModelView);
