@@ -16,12 +16,10 @@ namespace WebApp_MVC_Assignment4.Models.Database
         }
 
        
-        public City Create(Person PersonInCity, string States, string CityName)
+        public City Create(List <Person> personInCity, string States, string CityName)
         {
             City addingCity = new City() { States= States, CityName= CityName};
             
-            List<Person> personInCity = new List<Person>();
-            personInCity.Add(PersonInCity);
             addingCity.PersonInCity = personInCity;
 
             _peopleDbContext.Add(addingCity);

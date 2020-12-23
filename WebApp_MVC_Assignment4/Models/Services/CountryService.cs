@@ -20,8 +20,19 @@ namespace WebApp_MVC_Assignment4.Models.Services
 
         public Country Add(CreateCountryViewModel createCountryViewModel)
         {
-            City city=_cityRepo.Read(createCountryViewModel.CityID);
-            Country country = _countryRepo.Create(city, createCountryViewModel.CountryName);
+
+            List<City> cityInCountry = new List<City>();
+
+            foreach (int cityID in createCountryViewModel.ListCityID)
+            {
+                City city = _cityRepo.Read(cityID);
+                cityInCountry.Add(city);
+            }
+
+            //City city=_cityRepo.Read(createCountryViewModel.CityID);
+            //Country country = _countryRepo.Create(city, createCountryViewModel.CountryName);
+
+            Country country = _countryRepo.Create(cityInCountry, createCountryViewModel.CountryName);
 
             return country;
         }

@@ -10,7 +10,7 @@ namespace WebApp_MVC_Assignment4.Models.Repositorys
         private static List<Country> country = new List<Country>();
         private static int idCounter = 0;
 
-        public Country Create(City CityInCountry, string CountryName)
+        public Country Create(List<City> CityInCountry, string CountryName)
         {
             Country newCountry = new Country();
 
@@ -21,10 +21,10 @@ namespace WebApp_MVC_Assignment4.Models.Repositorys
             newCountry.CountryName = CountryName;
 
 
-            List<City> cityList = new List<City>();
-            cityList.Add(CityInCountry);
+            //List<City> cityList = new List<City>();
+            //cityList.Add(CityInCountry);
 
-            newCountry.CityList = cityList;
+            newCountry.CityList = CityInCountry;
 
 
             return newCountry;

@@ -14,8 +14,8 @@ namespace WebApp_MVC_Assignment4.Models.ViewModels
 
         public int updateCityID { get; set; }
 
-        public int PersonID { get; set; }
-                
+        public List <int> PeopleID { get; set; }
+
         [Required]
         public string CityName { get; set; }
 

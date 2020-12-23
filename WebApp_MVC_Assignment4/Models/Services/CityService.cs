@@ -32,9 +32,18 @@ namespace WebApp_MVC_Assignment4.Models.Services
                 return null;
             }*/
 
-            Person person = _peopleRepo.Read(createCityViewModel.PersonID);
-            City city = _cityRepo.Create(person, createCityViewModel.States, createCityViewModel.CityName);
+            List<Person> personInCity = new List<Person>();
 
+            foreach (int personID in createCityViewModel.PeopleID)
+            {
+                Person person = _peopleRepo.Read(personID);
+                personInCity.Add(person);
+            }
+            
+            //Person person = _peopleRepo.Read(createCityViewModel.PersonID);
+            //City city = _cityRepo.Create(person, createCityViewModel.States, createCityViewModel.CityName);
+
+            City city = _cityRepo.Create(personInCity, createCityViewModel.States, createCityViewModel.CityName);
             return city;
         }
 

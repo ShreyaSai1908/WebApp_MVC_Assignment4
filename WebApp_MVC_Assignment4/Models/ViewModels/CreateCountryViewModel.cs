@@ -9,7 +9,7 @@ namespace WebApp_MVC_Assignment4.Models.ViewModels
     public class CreateCountryViewModel
     {
         public List<Country> CountryList { get; set; }
-        public int CityID { get; set; }
+        public List<int> ListCityID { get; set; }
 
         [Required]
         public List<City> CityList = new List<City>();

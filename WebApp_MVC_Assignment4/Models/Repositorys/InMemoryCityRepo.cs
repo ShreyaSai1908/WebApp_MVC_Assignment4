@@ -11,7 +11,7 @@ namespace WebApp_MVC_Assignment4.Models.Repositorys
     {
         private static List<City> city = new List<City>();
         private static int idCounter = 0;
-        public City Create(Person person, string States, string CityName)
+        public City Create(List <Person> personInCity, string States, string CityName)
         {
             City newCity = new City();
 
@@ -21,7 +21,7 @@ namespace WebApp_MVC_Assignment4.Models.Repositorys
             //newCity.PersonInCity = PersonInCity;
 
             InMemoryPeopleRepo peopleRepo = new InMemoryPeopleRepo();
-            newCity.PersonInCity.Add(peopleRepo.Read(person.PersonID));
+            newCity.PersonInCity= personInCity;
             
             newCity.States = States;
 

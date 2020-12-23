@@ -15,21 +15,22 @@ namespace WebApp_MVC_Assignment4.Models.Database
             _peopleDbContext = peopleDbContext;
         }
 
-        public Country Create(City CityInCountry, string CountryName)
+        public Country Create(List  <City> CityInCountry, string CountryName)
         {
             Country addingCountry = new Country() { CountryName = CountryName};
 
-            CityInCountry.Country = addingCountry;
+            //CityInCountry.Country = addingCountry;
 
-            List<City> cityInCountry = new List<City>();
-            cityInCountry.Add(CityInCountry);
-            addingCountry.CityList = cityInCountry;
+            //List<City> cityInCountry = new List<City>();
+            //cityInCountry.Add(CityInCountry);
+            addingCountry.CityList = CityInCountry;
 
             _peopleDbContext.Add(addingCountry);
             _peopleDbContext.SaveChanges();
 
             foreach (City city in addingCountry.CityList)
-            {                 
+            {
+                 city.Country = addingCountry;
                 _peopleDbContext.Update(city);
                 _peopleDbContext.SaveChanges();
             }
