@@ -79,30 +79,36 @@ namespace WebApp_MVC_Assignment4.Controllers
         }
 
         // GET: CountryController/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            CreateCountryViewModel ctyVM = new CreateCountryViewModel();
+            Country editCountry=  _countryService.FindBy(id);
+            ctyVM.CountryName = editCountry.CountryName;
+            ctyVM.CountryId = editCountry.CountryId;
+
+            List<City> allCities = _cityService.All();
+            ctyVM.CityList = allCities;
+
+            return View("Edit",ctyVM);
         }
 
         // POST: CountryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(CreateCountryViewModel editCountry)
         {
-            try
-            {
-                return RedirectToAction(nameof(ShowCountry));
-            }
-            catch
-            {
-                return View();
-            }
+            _countryService.Edit(editCountry.CountryId , editCountry);
+
+            return RedirectToAction(nameof(ShowCountry));
         }
 
         // GET: CountryController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            _countryService.Remove(id);
+
+            return RedirectToAction(nameof(ShowCountry));
         }
 
         // POST: CountryController/Delete/5

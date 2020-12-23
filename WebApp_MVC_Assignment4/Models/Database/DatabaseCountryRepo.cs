@@ -39,7 +39,15 @@ namespace WebApp_MVC_Assignment4.Models.Database
 
         public bool Delete(Country country)
         {
-            throw new NotImplementedException();
+            bool delete = true;
+
+            if (delete == true)
+            {
+                _peopleDbContext.GetCountriesList.Remove(country);
+                _peopleDbContext.SaveChanges();
+            }
+
+            return delete;
         }
 
         public List<Country> Read()
@@ -49,12 +57,14 @@ namespace WebApp_MVC_Assignment4.Models.Database
 
         public Country Read(int id)
         {
-            throw new NotImplementedException();
+            return _peopleDbContext.GetCountriesList.Find(id);
         }
 
         public Country Update(Country country)
         {
-            throw new NotImplementedException();
+            _peopleDbContext.Update(country);
+            _peopleDbContext.SaveChanges();
+            return (country);
         }
     }
 }

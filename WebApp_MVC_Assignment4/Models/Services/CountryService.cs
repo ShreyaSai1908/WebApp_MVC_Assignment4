@@ -33,17 +33,19 @@ namespace WebApp_MVC_Assignment4.Models.Services
 
         public Country Edit(int id, CreateCountryViewModel edit)
         {
-            throw new NotImplementedException();
+            Country editedcountry = new Country() { CountryId = id, CountryName = edit.CountryName};
+
+            return _countryRepo.Update(editedcountry);
         }
 
         public Country FindBy(int id)
         {
-            throw new NotImplementedException();
+            return _countryRepo.Read(id);
         }
 
         public bool Remove(int id)
         {
-            throw new NotImplementedException();
+            return _countryRepo.Delete(FindBy(id));
         }
     }
 }
