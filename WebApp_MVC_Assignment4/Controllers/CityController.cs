@@ -60,10 +60,13 @@ namespace WebApp_MVC_Assignment4.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateCityViewModel createCity)
         {
+            City city = null;
+
             if (ModelState.IsValid)
             {
-                City city = _cityService.Add(createCity);
-
+                
+                city = _cityService.Add(createCity);
+                
                 if (city == null)
                 {
                     ModelState.AddModelError("msg", "Database Problem");
@@ -80,31 +83,36 @@ namespace WebApp_MVC_Assignment4.Controllers
         } 
 
         // GET: CityController/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            PeopleViewModel pplVM = _peopleService.All();
+            CreateCityViewModel cityVM = new CreateCityViewModel();
+            City editCity = _cityService.FindBy(id);
+
+            cityVM.States = editCity.States;
+            cityVM.CityName = editCity.CityName;
+            cityVM.PersonInCity = pplVM.AllPeople;
+            cityVM.updateCityID = id;
+            
+            return View("Edit", cityVM);
         }
 
         // POST: CityController/Edit/5
-        /*[HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id)
-        {
-           City edit = new City();
+        public ActionResult Edit(CreateCityViewModel updCity)
+        { 
+            _cityService.Edit(updCity.updateCityID, updCity);
 
-            //to be replaced by user input
-            edit.States = "EditStates";
-            edit.CityName = "EditCityName";
-
-            _cityService.Edit(id, edit);
-            _cityService.All();
-            return RedirectToAction(nameof(Create));
-        }*/
+            return RedirectToAction(nameof(City));
+        }
 
         // GET: CityController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            _cityService.Remove(id);
+            return RedirectToAction(nameof(City));
         }
 
         // POST: CityController/Delete/5
