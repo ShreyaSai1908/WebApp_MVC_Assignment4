@@ -42,9 +42,16 @@ namespace WebApp_MVC_Assignment4.Controllers
         }
 
         // GET: CountryController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult CountryDetails(int id)
         {
-            return View();
+            CreateCountryViewModel ctyVM = new CreateCountryViewModel();
+            Country  ctyDetails=_countryService.FindBy(id);
+
+            ctyVM.CountryId = ctyDetails.CountryId;
+            ctyVM.CountryName = ctyDetails.CountryName;
+            //ctyVM.CityList = _cityService.All(); //gives all the cities in the database and not for this particular country 
+            ctyVM.CityList= _countryService.FindAllCity(id); //gives all the cities in the database for this particular country 
+            return View(ctyVM);
         }
 
         // GET: CountryController/Create

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp_MVC_Assignment4.Models.Repositorys;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApp_MVC_Assignment4.Models.Database
 {
@@ -59,6 +60,11 @@ namespace WebApp_MVC_Assignment4.Models.Database
         public Country Read(int id)
         {
             return _peopleDbContext.GetCountriesList.Find(id);
+        }
+
+        public List<City> ReadAllCity(int id)
+        {
+            return _peopleDbContext.GetCitiesList.Where(s => s.Country.CountryId == id).ToList();
         }
 
         public Country Update(Country country)

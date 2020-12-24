@@ -54,6 +54,11 @@ namespace WebApp_MVC_Assignment4.Models.Services
             return _countryRepo.Read(id);
         }
 
+        public List <City> FindAllCity(int id)
+        {
+            return _countryRepo.ReadAllCity(id);
+        }
+
         public bool Remove(int id)
         {
             return _countryRepo.Delete(FindBy(id));

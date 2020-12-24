@@ -50,5 +50,10 @@ namespace WebApp_MVC_Assignment4.Models.Repositorys
             throw new NotImplementedException();
         }
 
+        public List<City> ReadAllCity(int id)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

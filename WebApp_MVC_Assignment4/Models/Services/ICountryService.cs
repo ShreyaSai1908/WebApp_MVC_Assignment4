@@ -13,5 +13,6 @@ namespace WebApp_MVC_Assignment4.Models.Services
         public Country FindBy(int id);
         public Country Edit(int id, CreateCountryViewModel edit);
         public bool Remove(int id);
+        public List<City> FindAllCity(int id);
     }
 }

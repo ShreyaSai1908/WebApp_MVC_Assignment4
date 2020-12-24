@@ -53,8 +53,8 @@ namespace WebApp_MVC_Assignment4.Models.Database
         }
 
         public City Read(int id)
-         {
-            return _peopleDbContext.GetCitiesList.Find(id);
+        {
+             return _peopleDbContext.GetCitiesList.Find(id);
         }
 
         public City Update(City city)
