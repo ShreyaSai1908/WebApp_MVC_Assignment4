@@ -64,6 +64,12 @@ namespace WebApp_MVC_Assignment4.Models.Services
             return _cityRepo.Read(id);
         }
 
+        public List<Person> FindAllPerson(int id)
+        {
+            return _cityRepo.ReadAllPersonInCity(id);
+        }
+
+
         public bool Remove(int id)
         {
             return _cityRepo.Delete(FindBy(id));

@@ -61,5 +61,10 @@ namespace WebApp_MVC_Assignment4.Models.Repositorys
             return true;
         }
 
+        public List<Person> ReadAllPersonInCity(int id)
+        {
+            throw new NotImplementedException();
+
+        }
     }
 }

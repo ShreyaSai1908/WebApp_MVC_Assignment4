@@ -35,15 +35,21 @@ namespace WebApp_MVC_Assignment4.Controllers
         // GET: CityController/City
         public ActionResult City()
         {
-            CreateCityViewModel cityVM = new CreateCityViewModel();
-            cityVM.CityList=_cityService.All();
-            return View(cityVM);
+            CreateCityViewModel ctyVM = new CreateCityViewModel();
+            ctyVM.CityList=_cityService.All();
+            return View(ctyVM);
         }
 
         // GET: CityController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult CityDetails(int id)
         {
-            return View();
+            CreateCityViewModel ctyVm = new CreateCityViewModel();
+            City cityDetails = _cityService.FindBy(id);
+            ctyVm.CityName = cityDetails.CityName;
+            ctyVm.States = cityDetails.States;
+            ctyVm.PersonInCity = _cityService.FindAllPerson(id);
+            return View(ctyVm);
         }
 
         // GET: CityController/Create

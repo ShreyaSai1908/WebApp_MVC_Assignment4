@@ -39,6 +39,7 @@ namespace WebApp_MVC_Assignment4.Controllers
             CreateCountryViewModel ctyVM = new CreateCountryViewModel();
             ctyVM.CountryList = _countryService.All();
             return View(ctyVM);
+            //return View("ShowCountry",ctyVM);
         }
 
         // GET: CountryController/Details/5

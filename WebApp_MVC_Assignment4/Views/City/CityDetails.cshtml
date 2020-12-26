@@ -1,0 +1,32 @@
+﻿@model WebApp_MVC_Assignment4.Models.ViewModels.CreateCityViewModel
+
+<div>
+    <h4>City Details</h4>
+    <hr />
+    <dl class="row">        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CityName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.States)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.States)
+        </dd>
+    </dl>
+    <div>
+        <h4>Details</h4>
+        <ul>
+            @foreach (var item in Model.PersonInCity)
+            {
+                <li>@item.FirstName @item.LastName</li>
+             }
+        </ul>
+    </div>
+</div>
+<div>
+    <a asp-action="City">Back to List</a>
+</div>
